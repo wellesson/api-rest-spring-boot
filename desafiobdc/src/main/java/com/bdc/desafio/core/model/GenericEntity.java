@@ -33,7 +33,8 @@ public class GenericEntity<I> implements Persistable<I>, Serializable {
   private static final long serialVersionUID = 8197809300936646012L;
 
   /**
-   * @author Wellesson Vieira Obtem o valor do atributo mapeado com a anotação @Id ou @EmbeddedId
+   * @author Wellesson Vieira 
+   * Objetivo: Obtem o valor do atributo mapeado com a anotação @Id ou @EmbeddedId
    * @param entidade
    * @param fields
    * @return Field

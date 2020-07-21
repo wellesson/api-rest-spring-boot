@@ -13,5 +13,5 @@ public class ExceptionVO implements Serializable {
 
 	private String codigo = "";
 	private String descricao = "";
-
+	
 }

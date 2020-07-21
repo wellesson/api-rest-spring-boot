@@ -1,6 +1,5 @@
 package com.bdc.desafio.core.exception;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen")
 public class AplicacaoException extends RuntimeException {
 
 	/**
@@ -10,6 +9,10 @@ public class AplicacaoException extends RuntimeException {
 
 	public AplicacaoException(final String erroMessagem) {
 		super(erroMessagem);
+	}
+
+	public AplicacaoException() {
+		super();
 	}
 
 }

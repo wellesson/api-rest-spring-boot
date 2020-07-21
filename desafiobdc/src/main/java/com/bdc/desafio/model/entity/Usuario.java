@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.bdc.desafio.core.model.GenericEntity;
 
@@ -38,7 +39,7 @@ public class Usuario extends GenericEntity<Long> {
 	@Column(nullable = false)
 	private String cpf;
 
-	@Column(nullable = false)
+	@NotBlank(message="erro nome")
 	private String nome;
 
 	@Column(nullable = false)

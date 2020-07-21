@@ -25,6 +25,7 @@ public class Perfil extends GenericEntity<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idperfil")
 	private Long id;
 
 	@Column(nullable = false)

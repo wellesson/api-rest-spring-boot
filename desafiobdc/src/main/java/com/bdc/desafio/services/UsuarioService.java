@@ -37,7 +37,7 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 		if (usuarioCadastrado.isPresent()) {
 			throw new RegistroJaExistenteException();
 		}
-		
+
 		Cidade cidade = cidadeService.buscar(requestUsuarioDTO.getEndereco().getCodigoCidade());
 		Perfil perfil = perfilService.buscar(requestUsuarioDTO.getCodigoPerfil());
 		Endereco endereco = new Endereco(cidade, requestUsuarioDTO.getEndereco().getLogradouro(),
@@ -52,10 +52,12 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 	}
 
 	public List<UsuarioDTO> findAll() {
+
 		List<Usuario> usuarios = this.repository.findAll();
 
-		if (usuarios.isEmpty())
+		if (usuarios.isEmpty()) {
 			throw new RecursoNaoEncontradoException();
+		}
 
 		List<UsuarioDTO> usuariosDTO = new ArrayList<UsuarioDTO>();
 
@@ -69,22 +71,24 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 
 	public UsuarioDTO findById(Long id) {
 
-		Optional<Usuario> usuario = Optional.ofNullable(this.repository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException()));
-		
+		Optional<Usuario> usuario = Optional
+				.ofNullable(this.repository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException()));
+
 		return convertModelToDto(usuario.get());
 	}
 
 	public UsuarioDTO findByCpfAndSenha(String cpf, String senha) {
-		
-		Optional<Usuario> usuario = Optional.ofNullable(this.repository.findByCpfAndSenha(cpf, senha).orElseThrow(() -> new RecursoNaoEncontradoException()));
+
+		Optional<Usuario> usuario = Optional.ofNullable(
+				this.repository.findByCpfAndSenha(cpf, senha).orElseThrow(() -> new RecursoNaoEncontradoException()));
 
 		return convertModelToDto(usuario.get());
 	}
 
-	public List<Usuario> findUsersByUf(Integer idUf) {
-		
+	public List<Usuario> findUsersByUf(Long idUf) {
+
 		List<Usuario> usuarios = this.repository.findUsersByUf(idUf);
-		
+
 		if (usuarios.isEmpty()) {
 			throw new RecursoNaoEncontradoException();
 		}
@@ -93,39 +97,36 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 	}
 
 	public List<Usuario> findByPerfil(Long idPerfil) {
-		
+
 		List<Usuario> usuarios = this.repository.findByPerfil(new Perfil(idPerfil));
-		
+
 		if (usuarios.isEmpty())
 			throw new RecursoNaoEncontradoException();
-		
+
 		List<UsuarioDTO> usuariosDTO = new ArrayList<UsuarioDTO>();
-		
+
 		usuarios.forEach(usuario -> {
 			usuariosDTO.add(convertModelToDto(usuario));
 		});
 
 		return usuarios;
 	}
-	
-	public UsuarioDTO atualizar(Long id, UsuarioDTO usuarioDTO) {
-		
-		if (!existe(id)) {
-			new RecursoNaoEncontradoException();
-		}
-		
-		Usuario usuario = this.repository.saveAndFlush(convertDtoToModel(usuarioDTO));
-		
-		return convertModelToDto(usuario);
-	}
-	
-	
 
-	private Usuario convertDtoToModel(UsuarioDTO usuarioDTO) {
-		Usuario usuario = new Usuario();
-		modelMapper.map(usuarioDTO, usuario);
+	public UsuarioDTO atualizar(Long id, RequestUsuarioDTO requestUsuarioDTO) {
 
-		return usuario;
+		Optional<Usuario> usuarioCadastrado = Optional.ofNullable(
+				this.repository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException()));
+
+		Cidade cidade = cidadeService.buscar(requestUsuarioDTO.getEndereco().getCodigoCidade());
+		Perfil perfil = perfilService.buscar(requestUsuarioDTO.getCodigoPerfil());
+		Endereco endereco = new Endereco(cidade, requestUsuarioDTO.getEndereco().getLogradouro(),
+				requestUsuarioDTO.getEndereco().getNumero(), requestUsuarioDTO.getEndereco().getBairro());
+		Usuario usuario = new Usuario(usuarioCadastrado.get().getId(),requestUsuarioDTO.getCpf(), requestUsuarioDTO.getNome(),
+				requestUsuarioDTO.getSenha(), endereco, perfil);
+
+		Usuario usuarioAtualizado = super.salvar(usuario);
+
+		return convertModelToDto(usuarioAtualizado);
 	}
 
 	private UsuarioDTO convertModelToDto(Usuario usuario) {

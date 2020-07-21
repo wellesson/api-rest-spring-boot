@@ -14,7 +14,7 @@ public interface UsuarioRepository extends GenericCrudRepository<Usuario, Long> 
 	Optional<Usuario> findByCpfAndSenha(String cpf, String senha);
 
 	@Query("SELECT usuario FROM Usuario usuario, Endereco endereco, Cidade cidade, UnidadeFederativa unidadefederativa WHERE unidadefederativa.id = :idUf and cidade.estado = unidadefederativa.id and cidade.id = endereco.cidade and endereco.id = usuario.endereco")
-	List<Usuario> findUsersByUf(Integer idUf);
+	List<Usuario> findUsersByUf(Long idUf);
 
 	List<Usuario> findByPerfil(Perfil perfil);
 

@@ -57,7 +57,6 @@ public abstract class GenericCrudService<T extends GenericEntity<I>, I, R extend
   @Transactional(rollbackFor = Throwable.class)
   public T salvar(T entidade) throws AplicacaoException {
     return this.repository.saveAndFlush(entidade);
-
   }
 
 }

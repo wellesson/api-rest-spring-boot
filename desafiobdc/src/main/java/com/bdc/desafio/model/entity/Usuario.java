@@ -35,7 +35,7 @@ public class Usuario extends GenericEntity<Long> {
 	@Column(name = "idusuario")
 	private Long id;
 
-	@Column(unique = true)
+	@Column(nullable = false)
 	private String cpf;
 
 	@Column(nullable = false)

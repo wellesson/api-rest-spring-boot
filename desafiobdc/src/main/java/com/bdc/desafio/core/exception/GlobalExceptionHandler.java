@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(value = { AplicacaoException.class, RecursoNaoEncontradoException.class, RegistroJaExistenteException.class })
+	@ExceptionHandler(value = { AplicacaoException.class, RecursoNaoEncontradoException.class, RegistroJaExistenteException.class, org.hibernate.PropertyValueException.class })
 	public ResponseEntity<Object> handleException(final Throwable ex, final WebRequest request) {
 
 		log.error(ExceptionUtils.getMessage(ex), ex);
@@ -40,7 +40,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 			return new ResponseEntity<>(exceptionVO, HttpStatus.BAD_REQUEST);
 
-		} else {
+		} else if (ex instanceof RegistroJaExistenteException) {
+
+			final ExceptionVO exceptionVO = new ExceptionVO("400", "Campo obrigatório não informado!");
+
+			return new ResponseEntity<>(exceptionVO, HttpStatus.BAD_REQUEST);
+
+		}  else {
 
 			final ExceptionVO exceptionVO = new ExceptionVO("Erro interno do servidor!", "500");
 

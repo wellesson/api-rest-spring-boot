@@ -56,7 +56,7 @@ public class UsuarioController {
 	@GetMapping("/uf/{codigoUf}")
 	@ApiOperation(value = "Listar todos os usuários por UF")
 	@ApiResponses(@ApiResponse(code = 200, message = "Consulta realizada com sucesso.", response = UsuarioDTO.class))
-	public ResponseEntity<List<Usuario>> consultarPorUf(@PathVariable Integer codigoUf) {
+	public ResponseEntity<List<Usuario>> consultarPorUf(@PathVariable Long codigoUf) {
 		return ResponseEntity.ok(this.usuarioService.findUsersByUf(codigoUf));
 	}
 
@@ -78,8 +78,8 @@ public class UsuarioController {
 	@PutMapping("/{id}")
 	@ApiOperation(value = "Atualizar usuário")
 	@ApiResponses(@ApiResponse(code = 200, message = "Atualização realizada com sucesso.", response = UsuarioDTO.class))
-	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-		return ResponseEntity.ok(usuarioService.atualizar(id, usuarioDTO));
+	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Long id, @RequestBody RequestUsuarioDTO requestUsuarioDTO) {
+		return ResponseEntity.ok(usuarioService.atualizar(id, requestUsuarioDTO));
 	}
 
 	@GetMapping("/autenticacao/{cpf}/{senha}")

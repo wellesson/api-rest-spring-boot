@@ -10,10 +10,11 @@ public class ResponseUsuarioDTO {
 
 	private String cpf;
 
+	private String senha;
+
 	private ResponsePerfilDTO perfil;
 
 	private ResponseEnderecoDTO endereco;
 
-	private String senha;
 	
 }

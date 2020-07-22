@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "25dd31c2-3240-4cd7-b7f0-fa7fb6fc2c09",
+		"name": "CRUD Usuário",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Incluir",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"nome\": \"Wellesson Vieira\",\r\n   \"cpf\":\"17544874599\",\r\n   \"senha\":\"1234\",\r\n   \"codigoPerfil\":1,\r\n   \"endereco\":{\r\n      \"codigoCidade\":1,\r\n      \"logradouro\":\"Rua Ana Gama e Melo\",\r\n      \"numero\":\"22\",\r\n      \"bairro\":\"Quadramares\"      \r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar por UF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Wellesson Vieira\",\r\n    \"documentos\": [{\r\n        \"nrdocumento\" : \"123.456.789-55\",\r\n        \"tpDocumento\": {\r\n            \"nome\": \"RG\"\r\n        }\r\n    }],\r\n        \"telefones\": [{\r\n            \"numero\": \"98888-7777\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario/uf/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario",
+						"uf",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar por Perfil",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Wellesson Vieira\",\r\n    \"documentos\": [{\r\n        \"nrdocumento\" : \"123.456.789-55\",\r\n        \"tpDocumento\": {\r\n            \"nome\": \"RG\"\r\n        }\r\n    }],\r\n        \"telefones\": [{\r\n            \"numero\": \"98888-7777\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario/perfil/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario",
+						"perfil",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"nome\": \"Wellesson Vieira\",\r\n   \"cpf\":\"17544874599\",\r\n   \"senha\":\"1234\",\r\n   \"codigoPerfil\":1,\r\n   \"endereco\":{\r\n      \"codigoCidade\":2,\r\n      \"logradouro\":\"Rua Rodrigues Alves\",\r\n      \"numero\":\"55\",\r\n      \"bairro\":\"Esperança\"      \r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Wellesson Vieira\",\r\n    \"documentos\": [{\r\n        \"nrdocumento\" : \"123.456.789-55\",\r\n        \"tpDocumento\": {\r\n            \"nome\": \"RG\"\r\n        }\r\n    }],\r\n        \"telefones\": [{\r\n            \"numero\": \"98888-7777\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuario/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

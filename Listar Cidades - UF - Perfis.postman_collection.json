@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "f7dda601-c3ce-4f59-9bf6-ebd86f58c282",
+		"name": "Listas Cidades - UF - Perfis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar Cidade",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cidade/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cidade",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar UF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Wellesson Vieira\",\r\n    \"documentos\": [{\r\n        \"nrdocumento\" : \"123.456.789-55\",\r\n        \"tpDocumento\": {\r\n            \"nome\": \"RG\"\r\n        }\r\n    }],\r\n        \"telefones\": [{\r\n            \"numero\": \"98888-7777\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/uf/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"uf",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Perfis",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Wellesson Vieira\",\r\n    \"documentos\": [{\r\n        \"nrdocumento\" : \"123.456.789-55\",\r\n        \"tpDocumento\": {\r\n            \"nome\": \"RG\"\r\n        }\r\n    }],\r\n        \"telefones\": [{\r\n            \"numero\": \"98888-7777\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/perfil",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"perfil"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,4 +1,4 @@
-package com.bdc.desafio.controllers;
+package com.bdc.desafio.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -18,7 +18,6 @@ import com.bdc.desafio.model.entity.Endereco;
 import com.bdc.desafio.model.entity.UnidadeFederativa;
 import com.bdc.desafio.model.entity.Usuario;
 import com.bdc.desafio.model.repositories.UsuarioRepository;
-import com.bdc.desafio.services.UsuarioService;
 
 @SpringBootTest
 public class UsuarioServiceTest {

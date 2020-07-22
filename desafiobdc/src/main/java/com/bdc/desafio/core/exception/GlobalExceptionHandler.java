@@ -52,7 +52,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		else if (ex instanceof DataIntegrityViolationException) {
 
-			final ExceptionVO exceptionVO = new ExceptionVO("400", "Campo obrigatório não informado.");
+			final ExceptionVO exceptionVO = new ExceptionVO("400", mensagemError);
 
 			return new ResponseEntity<>(exceptionVO, HttpStatus.BAD_REQUEST);
 

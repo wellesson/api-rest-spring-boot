@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.util.Strings;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bdc.desafio.core.exception.AplicacaoException;
 import com.bdc.desafio.core.services.GenericCrudService;
-import com.bdc.desafio.core.util.Utils;
 import com.bdc.desafio.dtos.request.RequestUsuarioDTO;
 import com.bdc.desafio.dtos.response.ResponseUsuarioDTO;
 import com.bdc.desafio.exception.RecursoNaoEncontradoException;
@@ -31,13 +32,15 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 
 	public ResponseUsuarioDTO incluir(RequestUsuarioDTO requestDTO) {
 
-		Optional<Usuario> usuarioCadastrado = this.repository.findByCpf(Utils.removerFormatacao(requestDTO.getCpf()));
+		String cpf = validarCpf(requestDTO.getCpf());
+		
+		Optional<Usuario> usuarioCadastrado = this.repository.findByCpf(cpf);
 		
 		if (usuarioCadastrado.isPresent()) {
 			throw new RegistroJaExistenteException();
 		}
 
-		Usuario usuario = new Usuario(requestDTO.getCpf(), requestDTO.getNome(), requestDTO.getSenha(), 
+		Usuario usuario = new Usuario(cpf, requestDTO.getNome(), requestDTO.getSenha(), 
 				obterDadosEndereco(requestDTO), obterDadosPerfil(requestDTO));
 
 		usuario = super.salvar(usuario);
@@ -131,8 +134,8 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 
 		Optional<Usuario> usuarioCadastrado = Optional.ofNullable(this.repository.findById(id)
 				.orElseThrow(() -> new RecursoNaoEncontradoException()));
-
-		Usuario usuario = new Usuario(usuarioCadastrado.get().getId(), Utils.removerFormatacao(requestDTO.getCpf()), 
+		
+		Usuario usuario = new Usuario(usuarioCadastrado.get().getId(), validarCpf(requestDTO.getCpf()), 
 				requestDTO.getNome(), requestDTO.getSenha(), obterDadosEndereco(requestDTO), obterDadosPerfil(requestDTO));
 		
 		Usuario usuarioAtualizado = super.salvar(usuario);
@@ -155,6 +158,29 @@ public class UsuarioService extends GenericCrudService<Usuario, Long, UsuarioRep
 		modelMapper.map(usuario, usuarioDTO);
 
 		return usuarioDTO;
+	}
+	
+	private String validarCpf(String numero) {
+		boolean cpfInvalido = Strings.isBlank(numero);
+		if (cpfInvalido) {
+			throw new AplicacaoException("CPF não informado.");
+		} else if (cpfInvalido = numero.length() > 14 ){
+			throw new AplicacaoException("CPF é inválido.");
+		}
+		else {
+			numero = removerFormatacao(numero);
+			cpfInvalido = numero.length() != 11 || !numero.matches("[0-9]+");
+		}
+		
+		if (cpfInvalido) {
+			throw new AplicacaoException("CPF é inválido.");
+		}
+
+		return numero;
+	}
+	
+	private String removerFormatacao(String valor) {
+		return valor.replaceAll("\\D", Strings.EMPTY);
 	}
 
 }

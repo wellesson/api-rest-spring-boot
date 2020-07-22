@@ -50,7 +50,7 @@ public abstract class GenericCrudController<T extends GenericEntity<I>, I, S ext
 	@GetMapping
 	public @ResponseBody ResponseEntity<List<T>> listar() throws AplicacaoException {
 
-		GenericCrudController.log.debug("Realizando a chamada do controller: " + this.getClass().getName()
+		log.debug("Realizando a chamada do controller: " + this.getClass().getName()
 				+ ".listar(). Realizando a chamada do service: " + this.service.getClass().getName() + ".obterTodos()");
 
 		final List<T> result = this.service.listar();
@@ -114,7 +114,7 @@ public abstract class GenericCrudController<T extends GenericEntity<I>, I, S ext
 	public ResponseEntity<Void> remover(final @PathVariable I id) throws AplicacaoException {
 
 		log.debug("Realizando a chamada do controller: " + this.getClass().getName()+ ".remover( " + id + " ). Realizando a chamada do service: " 
-		+ this.service.getClass().getName() + ".remover( " + id + " )");
+				+ this.service.getClass().getName() + ".remover( " + id + " )");
 
 		this.service.remover(id);
 

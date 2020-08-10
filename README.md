@@ -1,6 +1,4 @@
-# Desafio Java
-
-API Rest Spring Boot
+# Java - API Rest Spring Boot
 
 ## Funcionalidades
 
